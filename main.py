@@ -61,10 +61,13 @@ def subscribe():
 
     from huobi.client.generic import GenericClient
     generic_client = GenericClient()
-    symbol_objs = generic_client.get_exchange_symbols()
-    symbols = ','.join([list_obj.symbol for list_obj in symbol_objs])
+    symbols = ','.join([list_obj.symbol for list_obj in generic_client.get_exchange_symbols()])
     print(symbols)
     trade_client.sub_order_update(symbols=symbols, callback=callback)
 
 if __name__ == "__main__":
     subscribe()
+
+    import time
+    while True:
+        time.sleep(1)
