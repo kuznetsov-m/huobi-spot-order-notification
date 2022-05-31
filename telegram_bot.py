@@ -1,7 +1,6 @@
 import os
 import telebot
 from telebot import types
-from telebot import apihelper
 
 
 def send_text(reciver_user_id: int, text: str):
