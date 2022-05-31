@@ -8,6 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "3.9.13"
 huobi-client = {url = "https://github.com/kuznetsov-m-forks/huobi_Python/archive/refs/tags/v2.0.1.tar.gz"}
+pyTelegramBotAPI = "4.5.1"
 
 [tool.poetry.dev-dependencies]
 
