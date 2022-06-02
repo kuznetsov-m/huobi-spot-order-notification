@@ -32,7 +32,7 @@ def build_notification_text(order_obj) -> str:
 
     if order_state == 'SUBMITTED':
         text += '🆕 '
-    elif 'FILL' in order_state:
+    elif order_state == 'FILLED':
         text += '✅ '
     elif order_state == 'CANCELED':
         text += '🚫 '
@@ -41,7 +41,10 @@ def build_notification_text(order_obj) -> str:
     text += f'Price: {"%.8f" % float(order_obj.price)}\n'
     text += f'Amount: {"%.8f" % float(order_obj.amount)}\n'
     text += f'Order Id: #ID{order_obj.id}\n'
-    text += f'Filled Fees: {order_obj.filled_fees}\n'
+    
+    if float(order_obj.filled_fees):
+        text += f'Filled Fees: {"%.8f" % float(order_obj.filled_fees)}\n'
+    
     text += f'Created at: {datetime.fromtimestamp(order_obj.created_at / 1e3).strftime(dt_str_format)}'
 
     if order_obj.canceled_at:
@@ -79,6 +82,8 @@ def subscribe():
     generic_client = GenericClient()
     symbols = ','.join([list_obj.symbol for list_obj in generic_client.get_exchange_symbols()])
     trade_client.sub_order_update(symbols=symbols, callback=callback)
+
+    print('subscribed')
 
 if __name__ == "__main__":
     telegram_bot.send_text(TELEGRAM_USER_ID, 'Bot restarted')
