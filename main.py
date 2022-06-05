@@ -77,13 +77,17 @@ def subscribe():
     """
     Subscribe to spot order events 
     """
-
-    from huobi.client.generic import GenericClient
-    generic_client = GenericClient()
-    symbols = ','.join([list_obj.symbol for list_obj in generic_client.get_exchange_symbols()])
+    
+    symbols = os.environ.get('SYMBOLS')
+    if not symbols:
+        print('[WARNING] SYMBOLS env variable not found. All symbols will be tracked. Operation in this mode may not be stable.\n\
+            https://github.com/kuznetsov-m/huobi-spot-order-notification/issues/2'
+        )
+        from huobi.client.generic import GenericClient
+        generic_client = GenericClient()
+        symbols = ','.join([list_obj.symbol for list_obj in generic_client.get_exchange_symbols()])
+    print(f'Tracked symbols: {symbols}')
     trade_client.sub_order_update(symbols=symbols, callback=callback)
-
-    print('subscribed')
 
 if __name__ == "__main__":
     telegram_bot.send_text(TELEGRAM_USER_ID, 'Bot restarted')
