@@ -15,3 +15,7 @@ Set next env variables:
 Create app and add next buildpacks:
 - [Python Poetry Buildpack](https://github.com/moneymeets/python-poetry-buildpack)
 - Heroku Python Buildpack
+
+# Links
+
+- https://huobiapi.github.io/docs/spot/v1/en/#websocket-account-and-order
