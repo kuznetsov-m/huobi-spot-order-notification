@@ -10,6 +10,8 @@ Set next env variables:
 - `ACCESS_KEY` and `SECRET_KEY` from your Huobi account
 - `TELEGRAM_API_TOKEN` - telegram bot API token
 - `TELEGRAM_USER_ID` - telegram notifications reciver user id
+optional env variables:
+- `SYMBOLS` - list of tracked symbols. Example: `btcusdt,ethusdt`.
 
 # Heroku deployment
 Create app and add next buildpacks:
